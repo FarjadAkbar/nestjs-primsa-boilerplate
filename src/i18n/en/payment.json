@@ -1,0 +1,8 @@
+{
+    "payment.paypal.webhook": "Invalid Paypal webhook.",
+    "payment.stripe.webhook": "Invalid Stripe webhook.",
+    "payment.user_transaction.not_found": "User transaction ID is invalid",
+    "payment.paypal.item_price": "Item amount must add up to specified amount subtotal (or total if amount details not specified).",
+    "payment.paypal.details_subtotal": "Transaction amount details (subtotal, tax, shipping) must add up to specified amount total.",
+    "payment.paypal.execute": "Payer ID is invalid or Requested payment ID was not found."
+}

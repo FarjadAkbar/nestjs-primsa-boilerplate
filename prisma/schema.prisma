@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "filteredRelationCount", "orderByNulls"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("APP_DATABASE_URL")
+}
+
+// Add custom models here
+enum UserType {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum RideUserType {
+  DRIVER
+  RIDER
+}
+
+model User {
+  id                               Int                @id @default(autoincrement())
+  email                            String             @unique
+  password                         String
+  name                             String
+  type                             UserType           @default(USER)
+  status                           UserStatus         @default(INACTIVE)
+  profilePictureId                 Int?               @unique
+  createdAt                        DateTime           @default(now()) @db.Timestamptz()
+  updatedAt                        DateTime           @default(now()) @updatedAt @db.Timestamptz()
+  deletedAt                        DateTime?          @db.Timestamptz()
+  profilePicture                   Media?             @relation("ProfilePicutre", fields: [profilePictureId], references: [id])
+  devices                          Device[]
+  tokens                           Token[]
+  medias                           Media[]            @relation("MediaOwner")
+}
+
+enum DeviceType {
+  WEB
+  ANDROID
+  IOS
+}
+
+model Device {
+  id        Int        @id @default(autoincrement())
+  userId    Int
+  authToken String
+  fcmToken  String?
+  type      DeviceType @default(ANDROID)
+  user      User       @relation(fields: [userId], references: [id])
+  createdAt DateTime   @default(now()) @db.Timestamptz()
+  updatedAt DateTime   @default(now()) @updatedAt @db.Timestamptz()
+  deletedAt DateTime?  @db.Timestamptz()
+}
+
+enum TokenReason {
+  FORGOT_PASSWORD
+  RESET_PASSWORD
+  VERIFICATION
+  CHANGE_PASSWORD
+}
+
+model Token {
+  id        Int         @id @default(autoincrement())
+  uuid      String      @default(uuid())
+  code      String
+  reason    TokenReason
+  userId    Int?
+  createdAt DateTime    @default(now()) @db.Timestamptz()
+  updatedAt DateTime    @default(now()) @updatedAt @db.Timestamptz()
+  deletedAt DateTime?   @db.Timestamptz()
+  user      User?       @relation(fields: [userId], references: [id])
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+  ARCHIVE
+  OTHER
+}
+
+enum MediaStatus {
+  UPLOADING
+  READY
+  STALE
+}
+
+enum MediaAccess {
+  PUBLIC
+  PRIVATE
+}
+
+model Media {
+  id                  Int                  @id @default(autoincrement())
+  name                String
+  extension           String
+  type                MediaType
+  access              MediaAccess
+  size                Float?
+  location            String?
+  path                String
+  thumbPath           String?
+  status              MediaStatus          @default(UPLOADING)
+  meta                Json?                @db.JsonB
+  userId              Int?
+  createdAt           DateTime             @default(now()) @db.Timestamptz()
+  updatedAt           DateTime             @default(now()) @updatedAt @db.Timestamptz()
+  deletedAt           DateTime?            @db.Timestamptz()
+  user                User?                @relation("MediaOwner", fields: [userId], references: [id])
+  userProfile         User?                @relation("ProfilePicutre")
+  chatEventAttachment ChatEventAttachment?
+  category            Category?
+  vendorCategory      VendorCategory?
+  productImage        ProductImage?
+  Store               Store?
+}

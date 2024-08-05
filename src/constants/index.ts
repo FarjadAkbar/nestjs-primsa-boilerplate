@@ -1,0 +1,5 @@
+export enum EmailTemplates {
+    WELCOME = 'WELCOME',
+    VERIFY_EMAIL = 'VERIFY_EMAIL',
+    FORGET_PASSWORD = 'FORGET_PASSWORD'
+}

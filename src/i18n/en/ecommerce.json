@@ -1,0 +1,4 @@
+{
+    "ecommerce.vendor.delete": "Vendor ${id} have stores! So you should have to delete them first.",
+    "ecommerce.vendor.delete_warehouse": "Vendor ${id} have products! So you should have to delete them first."
+}

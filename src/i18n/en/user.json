@@ -1,0 +1,13 @@
+{
+    "user.registered": "User has been registered successfully",
+    "user.notfound": "User not found",
+    "user.email_already_exist": "User with this email already exist",
+    "user.profile_picture_removed": "User profile picture removed successfully",
+    "user.device_not_found": "No device found for this user",
+    "user.already_signed": "User already signed this contract.",
+    "user.referral_code_already_added": "Already registered with a referral code",
+    "user.setting.touchId.not_enabled": "User setting touchId has not been enabled.",
+    "user.publickey.not_found": "User publickey not found.",
+    "user.location_not_set": "User location is not set",
+    "user.passwords_do_not_match": "Passwords do not match"
+}

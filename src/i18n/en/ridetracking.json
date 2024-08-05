@@ -1,0 +1,14 @@
+{
+    "riderequest.created": "Ride request created",
+    "riderequest.not_found": "Ride request not found",
+    "ride.not_found": "Ride not found",
+    "ridestatus.not_found":"Ride completed or expired",
+    "vehicle.not_found": "No vehicle is registered by user",
+    "location.not_found": "User location not found",
+    "riderequest.invalid": "Ride request data is invalid.",
+    "ride.invalid": "Ride data is invalid.",
+    "riderequest.expired": "Ride request has expired. Max live time of pending requests are 12 minutes.",
+    "riderequest.not_accepted": "The ride request of the ride you are looking for is not accepted or have expired.",
+    "riderequest.arrived_not_allowed": "You cannot mark status as arrived until you reached at rider starting point.",
+    "riderequest.cancellation_not_allowed": "Ride request cannot be cancelled. because ride is either completed or ongoing."
+}
